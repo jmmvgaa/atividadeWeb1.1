@@ -1,0 +1,99 @@
+<section>
+	<h3 style="margin:15px 0px 15px 700px;">Cadastrar Imóveis</h3>
+	<!-- Formulário cadastrar as tarefas-->
+	<form method="POST" action="/add">
+
+
+		<!--Nome/Name-->
+		 <h6 style="margin:0 0 0 15px" >Nome</h6>
+		<input type="text" 
+			name="name" 
+			id="name" 
+			placeholder="Nome do proprietário" 
+			style="margin:0 15px 15px 15px" 
+		/>
+		<!--CPF-->
+		 <h6 style="margin:0 0 0 15px" >CPF</h6>
+		<input type="text" 
+			name="CPF" 
+			id="CPF" 
+			placeholder="CPF" 
+			style="margin:0 15px 15px 15px" 
+		/>
+		<br />
+		<!--Endereço-->
+		 <h6 style="margin:0 0 0 15px" >Endereço</h6>
+		<input type="text" 
+			name="endereco" 
+			id="endereco" 
+			placeholder="Endereço do imóvel" 
+			style="margin:0 15px 15px 15px" 
+		/>
+		<br />
+
+		 <h6 style="margin:0 0 0 15px" >Data do registro</h6>
+		<!--Prazo/Due-->
+		<input type="date" 
+			name="Data_do_registro" 
+			id="Data_do_registro" 
+			placeholder="Data_do_registro" 
+			style="margin:0 15px 15px 15px" 
+		/>
+		<br />
+		<!--Definição-->
+		<input type="radio" name="tipo_casa" id="low" value="casa" style="margin:0 0px 0px 15px"  />
+		<label for="low" style="margin:0 15px 15px 0" >Casa</label>
+
+		
+		<input type="radio" name="tipo_casa" id="medium" value="apartamento" style="margin:0 0px 0px 15px"/>
+		<label for="medium"style="margin:0 15px 15px 0">Apartamento</label>
+		
+		<input type="radio" name="tipo_casa" id="high" value="outros" style="margin:0 0px 0px 15px"/>
+		<label for="high"style="margin:0 15px 15px 0">Outros</label>
+
+		
+		<!--Botão Salvar/Salvar-->
+		<input type="submit" name="save" id="save" value="Salvar" />
+		
+	</form>
+
+</section>
+<!-- Tabela com as tarefas cadastradas-->
+<section>
+	<h3>Tarefas:</h3>
+	<div class="table-responsive">
+		<table class="table table-hover table-sm" border="2">
+			<thead>
+				<tr>
+					<th>CPF</th>
+					<th>Nome</th>
+					<th>Endereço</th>
+					<th>Data_do_registro</th>
+					<th>tipo_casa</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach($this->view->taskList as $taskItem):?>
+					<tr>
+						<td><?=$taskItem['CPF']?></td>
+						<td><?=$taskItem['name']?></td>
+						<td><?=$taskItem['endereco']?></td>
+						<td><?=date("d/m/Y", strtotime( $taskItem['Data_do_registro']));?></td>
+						<td><?=$taskItem['tipo_casa']?></td>
+						<td><form method="POST" action="/delete">
+
+							<input type="submit" name="excluir" id="excluir" value="excluir" />
+							<input type="hidden" name="Delete" value=<?=$taskItem['CPF']?>>
+
+						</form>	
+						</td>
+
+							
+					</tr>
+				<?php endforeach;?>
+			</tbody>
+		</table>
+	</div>
+</section>
+
